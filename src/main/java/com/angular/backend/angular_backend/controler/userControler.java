@@ -7,6 +7,7 @@ import com.angular.backend.angular_backend.Models.JwtResponse;
 import com.angular.backend.angular_backend.entities.UserEneity;
 import com.angular.backend.angular_backend.services.JwtUserDetailService;
 import com.angular.backend.angular_backend.services.userService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,8 +24,7 @@ import java.util.List;
 
 @RequestMapping("/api")
 
-// @SecurityRequirement(name = "swagger")
-
+ @SecurityRequirement(name = "swagger")
 public class userControler {
     @Autowired
     private userService User;

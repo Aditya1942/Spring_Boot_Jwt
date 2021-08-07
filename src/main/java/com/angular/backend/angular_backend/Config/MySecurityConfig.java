@@ -45,6 +45,10 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
         // user for matching credentials
         // Use BCryptPasswordEncoder
         auth.userDetailsService(jwtUserDetailsService).passwordEncoder(passwordEncoder());
+        auth.inMemoryAuthentication()
+                .withUser("aditya")
+                .password(passwordEncoder().encode("aditya"))
+                .authorities("ADMIN");
     }
 
     @Bean
