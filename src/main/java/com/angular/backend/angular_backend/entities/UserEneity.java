@@ -12,7 +12,6 @@ import javax.persistence.*;
 @Entity
 @Table(name = "Users", uniqueConstraints = { @UniqueConstraint(columnNames = { "username" }) })
 @EntityListeners(AuditingEntityListener.class)
-@JsonIgnoreProperties(value = { "createdAt", "updatedAt" }, allowGetters = true)
 public class UserEneity {
 
     @Id

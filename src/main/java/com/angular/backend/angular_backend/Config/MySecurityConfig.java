@@ -37,7 +37,11 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
             // -- Swagger UI v3 (OpenAPI)
             "/v3/api-docs/**", "/swagger-ui/**",
             // other public endpoints of your API may be appended to this array
-            "/api/authenticate", "/api/register", "/api/user/login", "/api/user/register" };
+            "/api/authenticate", "/api/register", "/api/user/login", "/api/user/register",
+            // remove the following if you don't want to protect /api urls
+            "/api/**"
+
+    };
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
@@ -45,9 +49,7 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
         // user for matching credentials
         // Use BCryptPasswordEncoder
         auth.userDetailsService(jwtUserDetailsService).passwordEncoder(passwordEncoder());
-        auth.inMemoryAuthentication()
-                .withUser("aditya")
-                .password(passwordEncoder().encode("aditya"))
+        auth.inMemoryAuthentication().withUser("aditya").password(passwordEncoder().encode("aditya"))
                 .authorities("ADMIN");
     }
 

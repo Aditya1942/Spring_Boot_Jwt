@@ -1,6 +1,7 @@
 package com.angular.backend.angular_backend.controler;
 
 import com.angular.backend.angular_backend.Dtos.UserDto;
+import com.angular.backend.angular_backend.Dtos.UserUpdateDto;
 import com.angular.backend.angular_backend.Helper.JwtUtil;
 import com.angular.backend.angular_backend.Models.JwtRequest;
 import com.angular.backend.angular_backend.Models.JwtResponse;
@@ -24,7 +25,7 @@ import java.util.List;
 
 @RequestMapping("/api")
 
- @SecurityRequirement(name = "swagger")
+@SecurityRequirement(name = "swagger")
 public class userControler {
     @Autowired
     private userService User;
@@ -72,6 +73,18 @@ public class userControler {
     @GetMapping("/users")
     public List<UserEneity> Allusers() {
         return this.User.getAllUsers();
+    }
+
+    @GetMapping("/user/{id}")
+    public UserEneity getUser(@PathVariable("id") Long id) {
+        return this.User.getUser(id);
+    }
+
+    @PutMapping("/user/{id}")
+    public UserEneity updateUser(@PathVariable("id") Long id, @RequestBody UserUpdateDto user) {
+        UserEneity existing = this.User.getUser(id);
+
+        return this.userDetailsService.updateUser(id, user);
     }
 
 }

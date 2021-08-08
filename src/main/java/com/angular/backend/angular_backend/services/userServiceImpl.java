@@ -24,19 +24,20 @@ public class userServiceImpl implements userService {
         return this.users.findById(id).orElseThrow(() -> new NotFound("User doesn't exit"));
     }
 
-    @Override
-    public UserEneity addUser(UserEneity user) {
-        this.users.save(user);
-        return user;
-    }
+    // @Override
+    // public UserEneity addUser(UserEneity user) {
+    // this.users.save(user);
+    // return user;
+    // }
 
-    @Override
-    public UserEneity updateUser(Long id, UserEneity user) {
+    // @Override
+    // public UserEneity updateUser(Long id, UserEneity user) {
 
-        UserEneity existing = this.users.findById(id).orElseThrow(() -> new NotFound("User doesn't exit"));
-        existing.setUsername(user.getUsername());
+    // UserEneity existing = this.users.findById(id).orElseThrow(() -> new
+    // NotFound("User doesn't exit"));
+    // existing.setUsername(user.getUsername());
 
-        this.users.save(existing);
-        return null;
-    }
+    // this.users.save(existing);
+    // return null;
+    // }
 }
