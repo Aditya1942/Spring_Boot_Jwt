@@ -48,7 +48,7 @@ public class userControler {
 
     @PostMapping("/user/register")
     public ResponseEntity<?> saveUser(@RequestBody UserDto user) throws Exception {
-        return ResponseEntity.ok(userDetailsService.save(user));
+        return ResponseEntity.ok(this.userDetailsService.save(user));
     }
 
     @PostMapping("/user/login")
@@ -81,10 +81,10 @@ public class userControler {
     }
 
     @PutMapping("/user/{id}")
-    public UserEneity updateUser(@PathVariable("id") Long id, @RequestBody UserUpdateDto user) {
-        UserEneity existing = this.User.getUser(id);
+    public ResponseEntity<?> updateUser(@PathVariable("id") Long id, @RequestBody UserDto user) {
 
-        return this.userDetailsService.updateUser(id, user);
+            return ResponseEntity.ok(this.userDetailsService.updateUser(id, user));
+
     }
 
 }

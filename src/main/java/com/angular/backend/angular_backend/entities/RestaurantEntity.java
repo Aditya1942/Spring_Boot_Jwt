@@ -10,7 +10,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @Table(name = "Restaurent", uniqueConstraints = { @UniqueConstraint(columnNames = { "name" }) })
 @EntityListeners(AuditingEntityListener.class)
 
-public class RestaurentEntity {
+public class RestaurantEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,11 +29,11 @@ public class RestaurentEntity {
     @JsonIgnore
     private String logo;
 
-    public RestaurentEntity() {
+    public RestaurantEntity() {
     }
 
-    public RestaurentEntity(Long id, String name, String address, Long phone, String email, String description,
-            String logo) {
+    public RestaurantEntity(Long id, String name, String address, Long phone, String email, String description,
+                            String logo) {
         this.id = id;
         this.name = name;
         this.address = address;

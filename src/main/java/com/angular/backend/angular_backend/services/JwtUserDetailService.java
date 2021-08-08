@@ -22,7 +22,8 @@ public class JwtUserDetailService implements UserDetailsService {
 
     @Autowired
     private PasswordEncoder bcryptEncoder;
-
+    @Autowired
+    private userService User;
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
@@ -42,13 +43,12 @@ public class JwtUserDetailService implements UserDetailsService {
         return userDao.save(newUser);
     }
 
-    public UserEneity updateUser(Long id, UserUpdateDto user) {
-        UserEneity newUser = new UserEneity();
-
-        newUser.setUsername(user.getUsername());
-
-        newUser.setPassword(bcryptEncoder.encode(user.getPassword()));
-        return userDao.save(newUser);
+    public Boolean updateUser(Long id, UserDto user) {
+        UserEneity updateUser = this.User.getUser(id);
+        updateUser.setUsername(user.getUsername());
+        updateUser.setPassword(bcryptEncoder.encode(user.getPassword()));
+        userDao.save(updateUser);
+        return true;
     }
 
 }

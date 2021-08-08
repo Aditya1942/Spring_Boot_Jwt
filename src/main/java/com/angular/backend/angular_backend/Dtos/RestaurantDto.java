@@ -1,6 +1,6 @@
 package com.angular.backend.angular_backend.Dtos;
 
-public class RestaurentDto {
+public class RestaurantDto {
     private String name;
     private String address;
     private Long phone;
