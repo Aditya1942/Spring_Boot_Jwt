@@ -17,4 +17,5 @@ public class AngularBackendApplication {
 		SpringApplication.run(AngularBackendApplication.class, args);
 	}
 
+
 }
