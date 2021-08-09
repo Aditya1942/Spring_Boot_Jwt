@@ -1,12 +1,11 @@
 package com.angular.backend.angular_backend.controler;
 
 import com.angular.backend.angular_backend.Dtos.UserDto;
-import com.angular.backend.angular_backend.Dtos.UserUpdateDto;
 import com.angular.backend.angular_backend.Helper.JwtUtil;
 import com.angular.backend.angular_backend.Models.JwtRequest;
 import com.angular.backend.angular_backend.Models.JwtResponse;
 import com.angular.backend.angular_backend.entities.UserEneity;
-import com.angular.backend.angular_backend.services.JwtUserDetailService;
+import com.angular.backend.angular_backend.services.UserDetailServiceImpl;
 import com.angular.backend.angular_backend.services.userService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +29,7 @@ public class userControler {
     @Autowired
     private userService User;
     @Autowired
-    private JwtUserDetailService userDetailsService;
+    private UserDetailServiceImpl userDetailsService;
     @Autowired
     private AuthenticationManager authenticationManager;
     @Autowired
@@ -46,12 +45,12 @@ public class userControler {
         }
     }
 
-    @PostMapping("/user/register")
+    @PostMapping("/register")
     public ResponseEntity<?> saveUser(@RequestBody UserDto user) throws Exception {
         return ResponseEntity.ok(this.userDetailsService.save(user));
     }
 
-    @PostMapping("/user/login")
+    @PostMapping("/login")
     public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
 
         try {

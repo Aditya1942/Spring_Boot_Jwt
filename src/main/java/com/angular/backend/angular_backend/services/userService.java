@@ -5,11 +5,8 @@ import java.util.List;
 
 public interface userService {
 
-    public List<UserEneity> getAllUsers();
+     List<UserEneity> getAllUsers();
 
-    public UserEneity getUser(Long id);
-
-    // public UserEneity addUser(UserEneity user);
-    // public UserEneity updateUser(Long id, UserEneity user);
+     UserEneity getUser(Long id);
 
 }

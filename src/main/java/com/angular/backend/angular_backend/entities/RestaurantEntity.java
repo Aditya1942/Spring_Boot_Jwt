@@ -4,12 +4,13 @@ import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import lombok.Data;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
 @Table(name = "Restaurent", uniqueConstraints = { @UniqueConstraint(columnNames = { "name" }) })
 @EntityListeners(AuditingEntityListener.class)
-
+@Data
 public class RestaurantEntity {
 
     @Id
@@ -29,81 +30,6 @@ public class RestaurantEntity {
     @JsonIgnore
     private String logo;
 
-    public RestaurantEntity() {
-    }
 
-    public RestaurantEntity(Long id, String name, String address, Long phone, String email, String description,
-                            String logo) {
-        this.id = id;
-        this.name = name;
-        this.address = address;
-        this.phone = phone;
-        this.email = email;
-        this.description = description;
-        this.logo = logo;
-    }
-
-    public Long getId() {
-        return this.id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return this.name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getAddress() {
-        return this.address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public Long getPhone() {
-        return this.phone;
-    }
-
-    public void setPhone(Long phone) {
-        this.phone = phone;
-    }
-
-    public String getEmail() {
-        return this.email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getDescription() {
-        return this.description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getLogo() {
-        return this.logo;
-    }
-
-    public void setLogo(String logo) {
-        this.logo = logo;
-    }
-
-    @Override
-    public String toString() {
-        return "{" + " id='" + getId() + "'" + ", name='" + getName() + "'" + ", address='" + getAddress() + "'"
-                + ", phone='" + getPhone() + "'" + ", email='" + getEmail() + "'" + ", description='" + getDescription()
-                + "'" + ", logo='" + getLogo() + "'" + "}";
-    }
 
 }
