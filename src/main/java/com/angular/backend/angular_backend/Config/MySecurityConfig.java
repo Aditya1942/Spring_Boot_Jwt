@@ -48,7 +48,7 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
             // -- Swagger UI v3 (OpenAPI)
             "/v3/api-docs/**", "/swagger-ui/**",
             // other public endpoints of your API may be appended to this array
-            "/api/authenticate", "/api/register", "/api/user/login", "/api/user/register",
+            "/api/login", "/api/register",
             // remove the following if you don't want to protect /api urls
 //             "/api/**"
     };

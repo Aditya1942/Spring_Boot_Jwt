@@ -47,7 +47,21 @@ public class userControler {
 
     @PostMapping("/register")
     public ResponseEntity<?> saveUser(@RequestBody UserDto user) throws Exception {
-        return ResponseEntity.ok(this.userDetailsService.save(user));
+        this.userDetailsService.save(user);
+        try {
+//            authenticate(user.getUsername(), user.getPassword());
+
+            final UserDetails userDetails = userDetailsService.loadUserByUsername(user.getUsername());
+
+            final String token = jwtTokenUtil.generateToken(userDetails);
+
+            return ResponseEntity.ok(new JwtResponse(token));
+
+        } catch (Exception e) {
+            // TODO: handle exception
+
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
     }
 
     @PostMapping("/login")

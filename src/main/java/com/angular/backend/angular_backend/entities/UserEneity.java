@@ -1,7 +1,9 @@
 package com.angular.backend.angular_backend.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -23,6 +25,7 @@ public class UserEneity {
     @JsonIgnore
     private String password;
     @Column(name = "role")
+
     private String role;
 
 }
