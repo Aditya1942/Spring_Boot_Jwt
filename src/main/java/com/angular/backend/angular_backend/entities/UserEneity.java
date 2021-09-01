@@ -16,8 +16,10 @@ import javax.persistence.*;
 public class UserEneity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
 
+
+    private Long id;
+    @Schema(description ="enter a unique username ", type = "string", example = "name")
     @Column(name = "username",  unique = true)
     private String username;
 
