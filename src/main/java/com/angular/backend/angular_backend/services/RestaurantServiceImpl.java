@@ -1,14 +1,14 @@
 package com.angular.backend.angular_backend.services;
 
-import java.util.List;
-
 import com.angular.backend.angular_backend.Dao.RestaurantDao;
 import com.angular.backend.angular_backend.Dtos.RestaurantDto;
 import com.angular.backend.angular_backend.Exceptions.NotFound;
 import com.angular.backend.angular_backend.entities.RestaurantEntity;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class RestaurantServiceImpl implements RestaurantService {
@@ -22,8 +22,8 @@ public class RestaurantServiceImpl implements RestaurantService {
     }
 
     @Override
-    public RestaurantEntity getRestaurantById(Long id) {
-        return this.restaurant.findById(id).orElseThrow(() -> new NotFound("User doesn't exit"));
+    public Optional<RestaurantEntity> getRestaurantById(Long id) {
+        return this.restaurant.findById(id);
     }
 
     @Override
