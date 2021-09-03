@@ -1,32 +1,29 @@
 package com.angular.backend.angular_backend.controler;
 
-import java.util.List;
-
 import com.angular.backend.angular_backend.Dtos.RestaurantDto;
 import com.angular.backend.angular_backend.entities.RestaurantEntity;
 import com.angular.backend.angular_backend.services.RestaurantService;
 
-import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
 @SecurityRequirement(name = "swagger")
 public class RestaurantsController {
 
+    static final String GET_SPECIFIS_DESC = "Gets specific restaurant with id.";
     @Autowired
     public RestaurantService restaurantService;
 
@@ -38,12 +35,40 @@ public class RestaurantsController {
 
     @Parameter(name = "id" ,example = "1" , allowEmptyValue = false,required = true,description = "Enter restaurent id")
     @GetMapping("/restaurant/{id}")
-    public RestaurantEntity getRestaurantById(@PathVariable long id) {
-        return restaurantService.getRestaurantById(id);
+    @Operation(
+            summary = GET_SPECIFIS_DESC,
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "SUCCESS",
+                            content = @Content(schema = @Schema(implementation = RestaurantDto.class))),
+                    @ApiResponse(responseCode = "404", description = "NOT_FOUND", content = @Content(schema = @Schema())),
+                    @ApiResponse(
+                            responseCode = "500",
+                            description = "SERVER_ERROR",
+                            content = @Content(schema = @Schema())
+                    )
+            }
+    )
+
+    public ResponseEntity<?> getRestaurantById(@PathVariable long id) {
+        Optional<RestaurantEntity> res = restaurantService.getRestaurantById(id);
+
+        if (res.isPresent()) {
+            return ResponseEntity.ok(res);
+        }
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body("{\n" +
+                        "  \"message\": \"No restaurant found\",\n" +
+                        "}");
     }
 
-    @PostMapping(value = "/restaurant", consumes = "application/json")
-    public ResponseEntity<?> addRestaurant(@RequestBody RestaurantDto restaurantEntity) throws Exception {
+    @PostMapping(value = "/restaurant", produces = "application/json", consumes = "application/json")
+    public ResponseEntity<?> addRestaurant(@io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Book to add.", required = true,
+            content = @Content(
+                    schema = @Schema(implementation = RestaurantDto.class))
+    ) RestaurantDto restaurantEntity) throws Exception {
         return ResponseEntity.ok(this.restaurantService.createRestaurant(restaurantEntity));
     }
     @Parameter(name = "id" ,example = "1" , allowEmptyValue = false,required = true,description = "Enter restaurent id")

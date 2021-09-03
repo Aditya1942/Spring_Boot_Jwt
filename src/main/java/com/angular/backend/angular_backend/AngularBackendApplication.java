@@ -12,10 +12,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @OpenAPIDefinition(info = @Info(title = "Angular Admin Panel", version = "3.0", description = "Angular Admin Panel"))
 @SecurityScheme(name = "swagger", scheme = "bearer", type = SecuritySchemeType.HTTP, in = SecuritySchemeIn.HEADER)
 public class AngularBackendApplication {
-
-	public static void main(String[] args) {
-		SpringApplication.run(AngularBackendApplication.class, args);
-	}
-
-
+    public static void main(String[] args) {
+        SpringApplication.run(AngularBackendApplication.class, args);
+    }
 }

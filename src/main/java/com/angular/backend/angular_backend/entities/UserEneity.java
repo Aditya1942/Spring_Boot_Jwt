@@ -7,10 +7,11 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
 import javax.persistence.*;
 
 @Entity
-@Table(name = "Users", uniqueConstraints = { @UniqueConstraint(columnNames = { "username" }) })
+@Table(name = "Users", uniqueConstraints = {@UniqueConstraint(columnNames = {"username"})})
 @EntityListeners(AuditingEntityListener.class)
 @Data
 public class UserEneity {
@@ -21,6 +22,7 @@ public class UserEneity {
     private Long id;
     @Schema(description ="enter a unique username ", type = "string", example = "name")
     @Column(name = "username",  unique = true)
+
     private String username;
 
     @Column(name = "password")
