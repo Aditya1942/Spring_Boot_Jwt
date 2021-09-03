@@ -9,6 +9,7 @@ import com.angular.backend.angular_backend.services.UserDetailServiceImpl;
 import com.angular.backend.angular_backend.services.userService;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -66,7 +67,7 @@ public class userControler {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
+    public ResponseEntity<?> createAuthenticationToken(@ParameterObject JwtRequest authenticationRequest) throws Exception {
 
         try {
             authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
@@ -88,16 +89,18 @@ public class userControler {
     public List<UserEneity> Allusers() {
         return this.User.getAllUsers();
     }
-    @Parameter(name = "id" ,example = "1" , allowEmptyValue = false,required = true,description = "User id")
+
+    @Parameter(name = "id", example = "1", allowEmptyValue = false, required = true, description = "User id")
     @GetMapping("/user/{id}")
     public UserEneity getUser(@PathVariable("id") Long id) {
         return this.User.getUser(id);
     }
-    @Parameter(name = "id" ,example = "1" , allowEmptyValue = false,required = true,description = "User id")
+
+    @Parameter(name = "id", example = "1", allowEmptyValue = false, required = true, description = "User id")
     @PutMapping("/user/{id}")
     public ResponseEntity<?> updateUser(@PathVariable("id") Long id, @RequestBody UserDto user) {
 
-            return ResponseEntity.ok(this.userDetailsService.updateUser(id, user));
+        return ResponseEntity.ok(this.userDetailsService.updateUser(id, user));
 
     }
 

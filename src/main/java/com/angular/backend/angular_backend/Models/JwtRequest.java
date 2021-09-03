@@ -1,16 +1,20 @@
 package com.angular.backend.angular_backend.Models;
 
+import io.swagger.v3.oas.annotations.Parameter;
+
 import java.io.Serializable;
 
 public class JwtRequest implements Serializable {
     private static final long serialVersionUID = 5926468583005150707L;
 
+    @Parameter(name = "Username", example = "aditya")
     private String username;
+
+    @Parameter(name = "Password", example = "password")
     private String password;
 
     //need default constructor for JSON Parsing
-    public JwtRequest()
-    {
+    public JwtRequest() {
 
     }
 
