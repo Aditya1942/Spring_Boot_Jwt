@@ -3,11 +3,13 @@ package com.angular.backend.angular_backend.controler;
 import com.angular.backend.angular_backend.Dtos.RestaurantDto;
 import com.angular.backend.angular_backend.entities.RestaurantEntity;
 import com.angular.backend.angular_backend.services.RestaurantService;
+
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,10 +28,12 @@ public class RestaurantsController {
     public RestaurantService restaurantService;
 
     @GetMapping("/restaurants")
+
     public List<RestaurantEntity> getAllRestaurants() {
         return restaurantService.getAllRestaurants();
     }
 
+    @Parameter(name = "id" ,example = "1" , allowEmptyValue = false,required = true,description = "Enter restaurent id")
     @GetMapping("/restaurant/{id}")
     @Operation(
             summary = GET_SPECIFIS_DESC,
@@ -67,7 +71,7 @@ public class RestaurantsController {
     ) RestaurantDto restaurantEntity) throws Exception {
         return ResponseEntity.ok(this.restaurantService.createRestaurant(restaurantEntity));
     }
-
+    @Parameter(name = "id" ,example = "1" , allowEmptyValue = false,required = true,description = "Enter restaurent id")
     @PutMapping("/restaurant/{id}")
     public ResponseEntity<?> updateRestaurant(@PathVariable Long id, @RequestBody RestaurantDto restaurantEntity)
             throws Exception {
@@ -86,7 +90,7 @@ public class RestaurantsController {
             return ResponseEntity.badRequest().body("Invalid Id");
         }
     }
-
+    @Parameter(name = "id" ,example = "1" , allowEmptyValue = false,required = true,description = "Enter restaurent id")
     @DeleteMapping("/restaurant/{id}")
     public ResponseEntity<?> deleteRestaurant(@PathVariable Long id) throws Exception {
         if (id > 0) {
